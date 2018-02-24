@@ -7,21 +7,21 @@ angular.module('todoApp')
 
     return {
         getItems : function(){
-            return $http.get(apiEndpoint + '/api/TodoList');
+            return $http.get(apiEndpoint + '/api/Todo');
         },
         getItem : function(id){
-            return $http.get(apiEndpoint + '/api/TodoList/' + id);
+            return $http.get(apiEndpoint + '/api/Todo/' + id);
         },
         postItem : function(item){
-            return $http.post(apiEndpoint + '/api/TodoList', item);
+            return $http.post(apiEndpoint + '/api/Todo', item);
         },
         putItem : function(item){
-            return $http.put(apiEndpoint + '/api/TodoList/', item);
+            return $http.put(apiEndpoint + '/api/Todo/' + item.id, item);
         },
         deleteItem : function(id){
             return $http({
                 method: 'DELETE',
-                url: apiEndpoint + '/api/TodoList/' + id
+                url: apiEndpoint + '/api/Todo/' + id
             });
         }
     };

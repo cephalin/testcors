@@ -9,9 +9,9 @@ angular.module('todoApp')
 
 
     $scope.editInProgressTodo = {
-        Name: "",
-        IsComplete: false,
-        Id: 0
+        name: "",
+        isComplete: false,
+        id: 0
     };
 
     
@@ -19,8 +19,9 @@ angular.module('todoApp')
     $scope.editSwitch = function (todo) {
         todo.edit = !todo.edit;
         if (todo.edit) {
-            $scope.editInProgressTodo.Name = todo.Name;
-            $scope.editInProgressTodo.ID = todo.Id;
+            $scope.editInProgressTodo.name = todo.name;
+            $scope.editInProgressTodo.id = todo.id;
+            $scope.editInProgressTodo.isComplete = todo.isComplete;
             $scope.editingInProgress = true;
         } else {
             $scope.editingInProgress = false;
@@ -46,6 +47,7 @@ angular.module('todoApp')
         })
     };
     $scope.update = function (todo) {
+        $scope.editInProgressTodo.isComplete = todo.isComplete;
         todoListSvc.putItem($scope.editInProgressTodo).success(function (results) {
             $scope.loadingMsg = "";
             $scope.populate();
@@ -56,6 +58,9 @@ angular.module('todoApp')
         })
     };
     $scope.add = function () {
+        if ($scope.editingInProgress) {
+            $scope.editingInProgress = false;
+        }
         todoListSvc.postItem({
             'Name': $scope.newToDoName,
             'IsComplete': false
