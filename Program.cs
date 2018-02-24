@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
 namespace TodoApi
-{
+{ 
     public class Program
     {
         public static void Main(string[] args)
